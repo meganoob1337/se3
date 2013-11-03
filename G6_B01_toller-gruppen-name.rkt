@@ -8,3 +8,9 @@
 (define (radians->degrees x)
   (/ (* 360 x) (* 2 pi))
 )
+
+
+;;; rechnet Seemeilen in Kilometer um
+(define (seemeile->kilometer nm)
+  (* 1.852 nm)
+)
