@@ -10,7 +10,25 @@
 )
 
 
-;;; rechnet Seemeilen in Kilometer um
+;;; Aufgabe 1.3
+; rechnet Seemeilen in Kilometer um
 (define (seemeile->kilometer nm)
   (* 1.852 nm)
+)
+
+
+;;; Aufgabe 2.1
+; P : Geographische Breite
+; L : Geographische Länge
+(define (distanzAB Pa La Pb Lb)
+  (seemeile->kilometer (* 60 
+             (r->d (acos
+                    (+
+                     (* (sin Pa) (sin Pb))
+                     (* (cos Pa) (cos Pb) (cos (- Lb La)))
+                     )
+                    )
+             )
+            )
+  )
 )
