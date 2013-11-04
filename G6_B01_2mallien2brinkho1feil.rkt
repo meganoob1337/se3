@@ -1,17 +1,21 @@
 #lang racket
+;;;; 2brinkho, 2mallien, 1feil
 ;;; Aufgabe 1.1
 ;; rechnet gradmaß ins bogenmaß um
+;@param x: number zahl in grad
 (define (degrees->radians x) 
   (/ (* 2 pi x) 360)
 )
 
 ;; rechnet bogenmaß in gradmaß um
+;@param x: number zahl in bogenmaß
 (define (radians->degrees x)
   (/ (* 360 x) (* 2 pi))
 )
 
 ;;; Aufgabe 1.2
 ;; berechnet den arccos eines cos
+;@param a: number
 (define (my-acos a)
   (radians->degrees 
    (atan (/ 
@@ -21,23 +25,27 @@
 
 ;;; Aufgabe 1.3
 ;; rechnet seemeilen in kilometer um
+;@param l: number seemeilen
 (define (nm->km l)
   (* 1.852 l)
 )
 
+
 ;;; Aufgabe 2.1
-; P : Geographische Breite
-; L : Geographische Länge
+;; berechnet die entfernung zwischen zwei punkten
+;@param Pa: number grad breite punkt A
+;@param La: number grad länge pubkt A
+;@param Pb: number grad breite punkt B
+;@param Lb: number grad länge pubkt B
 (define (distanzAB Pa La Pb Lb)
-  (nm->km (* 60 
-              (my-acos
-                    (+
+                    (nm->km (* 60 (my-acos (+
                      (* (sin (degrees->radians Pa)) 
                          (sin (degrees->radians Pb)))
                      (* (cos (degrees->radians Pa)) 
                          (cos (degrees->radians Pb)) 
                          (cos (degrees->radians(- Lb La))))
-                    ))))
+                    )
+                   )))
 )
 
 ; distanz oslo hongkong
@@ -50,8 +58,12 @@
 (display "Osterinsel->Lima\n")
 (distanzAB -27.10 -109.40 -12.10 -77.05)
 
+;;; Aufgabe 2.2
+
 ;;; Aufgabe 2.3
 ;;; 2.3.1
+;; gibt den kurswinkel in symbolische angabe für die himmelsrichtung aus
+;@param x: number grad
 (define (grad->himmelsrichtung x)
   (cond [(= x 0) "N"]
             [(= x 22.5) "NNE"]
@@ -73,7 +85,9 @@
        )
   )
 
-;; 2.3.2
+;;; 2.3.2
+;; gibt eine himmelsrichtung in grad aus
+;@param x: string himmelsrichtung
 (define (himmelsrichtung->grad x)
   (cond [(equal? x "N") 0]
             [(equal? x "NNE") 22.5]
